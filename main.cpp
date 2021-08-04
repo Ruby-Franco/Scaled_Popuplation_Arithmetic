@@ -1,27 +1,35 @@
 #include <iostream>
 #include <string>
+#include <bitset>
 
 using namespace std; 
 
-double getVar(double);
-
 int main(){
 
-	double x; 
-	double y; 
+	int x; // inputs to be in binary format
+	int y; // x is σ , y is π
 
 	cout << "input first number: " ;
 	cin >> x; 
+
 	cout << "input second number: "; 
 	cin >> y; 
 
+	// ** FIXME: find value of absPi using .count(); 
 
-	cout << getVar(x) << endl; 
-	cout << getVar(y) << endl;
+	string s = to_string(y); 
+	int counter = 0; 
+
+	for(int i = 0; i < s.size(); i++){
+		//cout << s.at(i) << " "; 
+		if(s.at(i) == 49){
+			counter++;
+		}
+	}
+
+	int absPi = counter; 
+	
+	cout << absPi; 
 
 	return 0; 
-}
-
-double getVar(double num){ //not done yet 
-	return num; 
 }

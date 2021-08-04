@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <bitset>
+#include <math.h> 
 
 using namespace std; 
 
@@ -43,7 +44,7 @@ int main(){
 	
 	//finding Σ0 
 
-	int upperSigma0 = (upperSigma - 1);
+	int upperSigma0 = pow (2.0, (upperSigma - 1));
 
 	cout << "Σ0 value: " << upperSigma0 << endl;
 

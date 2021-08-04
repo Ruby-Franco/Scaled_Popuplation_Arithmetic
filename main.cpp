@@ -33,6 +33,14 @@ int main(){
 	cout << "absolute value of Pi : " << absPi << endl;
 	cout << "value of pi: " << pi << endl;
 
+	string t = to_string(x); 
+
+	int upperSigma = t.size(); 
+	int lowerSigma = y; //decimal form of x 
+
+	cout << "σ value: " << lowerSigma << endl;
+	cout << "Σ value: " << upperSigma << endl;
+
 
 	return 0; 
 }

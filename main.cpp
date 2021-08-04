@@ -14,9 +14,8 @@ int main(){
 
 	cout << "input second number: "; 
 	cin >> y; 
-
-	// ** alt method:: find value of absPi using .count(); 
-
+	
+	// finding absPi(# of 1s in y input) and Pi(# of binary length of y input)
 	string s = to_string(y); 
 	int counter = 0; 
 
@@ -32,11 +31,12 @@ int main(){
 	
 	cout << "absolute value of Pi : " << absPi << endl;
 	cout << "value of pi: " << pi << endl;
-
+	
+	//finding lower(decimal form of x input) and upper(# of binary length of x) sigma
 	string t = to_string(x); 
-
+	
 	int upperSigma = t.size(); 
-	int lowerSigma = x; // FIXME:: decimal form of x(binary) 
+	int lowerSigma = stoi(t, nullptr, 2);
 
 	cout << "σ value: " << lowerSigma << endl;
 	cout << "Σ value: " << upperSigma << endl;
@@ -44,3 +44,4 @@ int main(){
 
 	return 0; 
 }
+

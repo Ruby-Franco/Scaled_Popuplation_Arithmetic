@@ -15,7 +15,7 @@ int main(){
 	cout << "input second number: "; 
 	cin >> y; 
 
-	// ** FIXME: find value of absPi using .count(); 
+	// ** alt method:: find value of absPi using .count(); 
 
 	string s = to_string(y); 
 	int counter = 0; 
@@ -36,7 +36,7 @@ int main(){
 	string t = to_string(x); 
 
 	int upperSigma = t.size(); 
-	int lowerSigma = y; //decimal form of x 
+	int lowerSigma = y; // FIXME:: decimal form of y(binary) 
 
 	cout << "σ value: " << lowerSigma << endl;
 	cout << "Σ value: " << upperSigma << endl;

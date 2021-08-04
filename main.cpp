@@ -36,7 +36,7 @@ int main(){
 	string t = to_string(x); 
 
 	int upperSigma = t.size(); 
-	int lowerSigma = y; // FIXME:: decimal form of y(binary) 
+	int lowerSigma = x; // FIXME:: decimal form of x(binary) 
 
 	cout << "σ value: " << lowerSigma << endl;
 	cout << "Σ value: " << upperSigma << endl;

@@ -3,7 +3,7 @@
 
 using namespace std; 
 
-int getVar(double);
+double getVar(double);
 
 int main(){
 

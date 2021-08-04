@@ -28,8 +28,11 @@ int main(){
 	}
 
 	int absPi = counter; 
+	int pi = s.size(); 
 	
-	cout << absPi; 
+	cout << "absolute value of Pi : " << absPi << endl;
+	cout << "value of pi: " << pi << endl;
+
 
 	return 0; 
 }

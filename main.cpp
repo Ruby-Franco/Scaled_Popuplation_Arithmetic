@@ -40,6 +40,12 @@ int main(){
 
 	cout << "σ value: " << lowerSigma << endl;
 	cout << "Σ value: " << upperSigma << endl;
+	
+	//finding Σ0 
+
+	int upperSigma0 = (upperSigma - 1);
+
+	cout << "Σ0 value: " << upperSigma0 << endl;
 
 
 	return 0; 

@@ -48,7 +48,17 @@ int main(){
 
 	cout << "Σ0 value: " << upperSigma0 << endl;
 
-
+	//finding scaling term: 2^(σ-Σ0)
+    int scalingTerm = pow (2.0, (lowerSigma - upperSigma0));
+    
+    cout << "scaling term: " << scalingTerm << endl;
+    
+    //finding SP Number 
+    
+    float sp  = (float(absPi)/pi) * scalingTerm; 
+    
+    cout << "numerical value of the SP number x: " << sp << endl;
+	
 	return 0; 
 }
 

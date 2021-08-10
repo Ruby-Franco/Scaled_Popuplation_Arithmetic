@@ -17,34 +17,33 @@ int main(){
 	cout << "input y: " ; 
 	cin >> yσ >> yπ ;
 
-	string x = to_string(xπ);  // FIXME: drops beginning 0s 
+	string x = to_string(xπ);  
 	string y = to_string(yπ);
-
-	int xpi = x.size();
-	int ypi = y.size();
-
+	
+	int π;
+	
+	if(x.size() > y.size()){
+		π = x.size();
+	}else{
+		π = y.size();
+	}
+	
 	string mxString, myString; 
 
-	cout << xpi << " " << ypi << endl;
-
-	for(int i = 0; i < (xpi/2);i++){
+	for(int i = 0; i < (π/2);i++){
 		mxString.append("1");
-	}
-	for(int i = xpi/2; i < xpi; i++){
-		mxString.append("0");
-	}
-
-	int mx = stoi(mxString);
-	cout << "mx: " << mx << endl;
-
-	for(int i = 0; i < (ypi/2);i++){
 		myString.append("0");
 	}
-	for(int i = ypi/2; i < ypi; i++){
+	for(int i = π/2; i < π; i++){
+		mxString.append("0");
 		myString.append("1");
 	}
-
-	int my = stoi(myString); 	//  FIXME: drops beginning 0's
+	//cout << "my(string form): " << myString << endl;
+	
+	int mx = stoi(mxString);
+	int my = stoi(myString); 	//drops beginning 0's
+	
+	cout << "mx: " << mx << endl;
 	cout << "my: " << my << endl;
 	
 	// turning into SP-format

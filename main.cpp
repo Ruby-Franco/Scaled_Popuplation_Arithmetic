@@ -8,24 +8,21 @@ using namespace std;
 int main(){
 	//SP-based Skewed Addition
 
-	int xsigma, xpi;
-	int ysigma, ypi; 
+	int xsigma, ysigma;
+	string xpi, ypi; 
 
 	cout << "input x: "; 
 	cin >> xsigma >> xpi;
 
 	cout << "input y: " ; 
 	cin >> ysigma >> ypi ;
-
-	string x = to_string(xpi);  
-	string y = to_string(ypi);
 	
 	int PI;
 	
-	if(x.size() > y.size()){
-		PI = x.size();
+	if(xpi.size() > ypi.size()){
+		PI = xpi.size();
 	}else{
-		PI = y.size();
+		PI = ypi.size();
 	}
 	
 	string mxString, myString; 

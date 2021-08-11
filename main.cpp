@@ -8,33 +8,33 @@ using namespace std;
 int main(){
 	//SP-based Skewed Addition
 
-	int xσ, xπ;
-	int yσ, yπ; 
+	int xsigma, xpi;
+	int ysigma, ypi; 
 
 	cout << "input x: "; 
-	cin >> xσ >> xπ;
+	cin >> xsigma >> xpi;
 
 	cout << "input y: " ; 
-	cin >> yσ >> yπ ;
+	cin >> ysigma >> ypi ;
 
-	string x = to_string(xπ);  
-	string y = to_string(yπ);
+	string x = to_string(xpi);  
+	string y = to_string(ypi);
 	
-	int π;
+	int PI;
 	
 	if(x.size() > y.size()){
-		π = x.size();
+		PI = x.size();
 	}else{
-		π = y.size();
+		PI = y.size();
 	}
 	
 	string mxString, myString; 
 
-	for(int i = 0; i < (π/2);i++){
+	for(int i = 0; i < (PI/2);i++){
 		mxString.append("1");
 		myString.append("0");
 	}
-	for(int i = π/2; i < π; i++){
+	for(int i = PI/2; i < PI; i++){
 		mxString.append("0");
 		myString.append("1");
 	}

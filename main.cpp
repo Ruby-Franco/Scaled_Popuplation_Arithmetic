@@ -6,42 +6,76 @@
 using namespace std; 
 
 int main(){
-	//SP-based Skewed Addition
+//SP-based Skewed Addition
 
 	int xsigma, ysigma;
-	string xpi, ypi; 
+	string xpi_string, ypi_string; 
 
 	cout << "input x: "; 
-	cin >> xsigma >> xpi;
+	cin >> xsigma >> xpi_string;
 
 	cout << "input y: " ; 
-	cin >> ysigma >> ypi ;
-	
-	int PI;
-	
-	if(xpi.size() > ypi.size()){
-		PI = xpi.size();
-	}else{
-		PI = ypi.size();
-	}
-	
-	string mxString, myString; 
+	cin >> ysigma >> ypi_string;
 
-	for(int i = 0; i < (PI/2);i++){
-		mxString.append("1");
-		myString.append("0");
+	int xpi = xpi_string.size(); 
+	int ypi = ypi_string.size();
+
+	int arrX[xpi];
+	int tmp; 
+	//cout << "x: ";
+
+	for(int i = 0; i < xpi; i++){
+		tmp = (int)xpi_string.at(i) - 48;
+		arrX[i] = tmp;
+		//cout << arrX[i];
 	}
-	for(int i = PI/2; i < PI; i++){
-		mxString.append("0");
-		myString.append("1");
+
+	int arrY[ypi];
+	int temp;
+	//cout << endl << "y: ";  
+
+	for(int i = 0; i < ypi; i++){
+		temp = (int)ypi_string.at(i) - 48;
+		arrY[i] = temp;
+		//cout << arrY[i];
 	}
-	//cout << "my(string form): " << myString << endl;
+
+	int mxArr[xpi];
+	int myArr[ypi];
+
+	for(int i = 0; i < (xpi/2);i++){
+		mxArr[i] = 1;
+	}
+
+	for(int i = xpi/2; i < xpi;i++){
+		mxArr[i] = 0;
+	}
+
+	for(int i = 0; i < (ypi/2);i++){
+		myArr[i] = 0;
+	}
+
+	for(int i = (ypi/2); i < ypi;i++){
+		myArr[i] = 1;
+	}
 	
-	int mx = stoi(mxString);
-	int my = stoi(myString); 	//drops beginning 0's
-	
-	cout << "mx: " << mx << endl;
-	cout << "my: " << my << endl;
+	// cout << "results: " ; 
+	// for(int i = 0; i < xpi; i++){
+	// 	cout << mxArr[i]; 
+	// }
+	// cout << endl;
+	// for(int i = 0; i < xpi; i++){
+	// 	cout << myArr[i]; 
+	// }
+	// cout << endl;
+
+	// int arrResult[PI];
+	// cout << endl << "result: " ; 
+	// for(int i = 0; i < PI; i++){
+	// 	arrResult[i] = arrX[i] | arrY[i];
+	// 	cout << arrResult[i];
+	// }
+	// cout << endl;
 	
 	// turning into SP-format
 	

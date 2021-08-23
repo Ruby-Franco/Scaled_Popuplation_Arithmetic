@@ -5,8 +5,10 @@
 
 using namespace std; 
 
+float spFormat(string, string);
+
 int main(){
-//SP-based Skewed Addition
+	//SP-based Skewed Addition
 
 	int xsigma, ysigma;
 	string xpi_string, ypi_string; 
@@ -59,56 +61,78 @@ int main(){
 		myArr[i] = 1;
 	}
 	
-	// cout << "results: " ; 
-	// for(int i = 0; i < xpi; i++){
-	// 	cout << mxArr[i]; 
-	// }
-	// cout << endl;
-	// for(int i = 0; i < xpi; i++){
-	// 	cout << myArr[i]; 
-	// }
-	// cout << endl;
+	cout << "mx: " ; 
+	for(int i = 0; i < xpi; i++){
+		cout << mxArr[i]; 
+	}
+	cout << endl << "my: ";
+	for(int i = 0; i < xpi; i++){
+		cout << myArr[i]; 
+	}
+	cout << endl;
 
-	// int arrResult[PI];
-	// cout << endl << "result: " ; 
-	// for(int i = 0; i < PI; i++){
-	// 	arrResult[i] = arrX[i] | arrY[i];
-	// 	cout << arrResult[i];
-	// }
-	// cout << endl;
+	int tmpX[xpi];
+	cout << "results of x & mx: "; 
+
+	for(int i = 0; i < xpi; i++){
+		tmpX[i] = arrX[i] & mxArr[i];
+		cout << tmpX[i]; 
+	}
+
+	int tmpY[ypi];
+	cout << endl << "results of y & my: "; 
+
+	for(int i = 0; i < ypi; i++){
+		tmpY[i] = arrY[i] & myArr[i];
+		cout << tmpY[i];
+	}	
+	cout << endl;
+
+	int arrZ[xpi];
+	cout << "Z: " ; 
+	for(int i = 0; i < xpi;i++){
+		arrZ[i] = tmpX[i] | tmpY[i];
+		cout << arrZ[i];
+	}
+	cout << endl;
 	
-	// turning into SP-format
+	//SP-format testing
 	
-	int a, b; // a is σ , b is π
+	string a, b;
 
 	cout << "input first number: " ;
 	cin >> a; 
 
 	cout << "input second number: "; 
 	cin >> b; 
+
+	cout << "SP Format: " << endl << spFormat(a,b);
 	
+	return 0; 
+}
+
+float spFormat(string a, string b){ // a is σ , b is π
+
 	// finding absPi(# of 1s in b) and Pi(length of b)
-	string s = to_string(b); 
 	int counter = 0; 
 
-	for(int i = 0; i < s.size(); i++){
+	for(int i = 0; i < b.size(); i++){
 		//cout << s.at(i) << " "; 
-		if(s.at(i) == 49){
+		if(b.at(i) == 49){
 			counter++;
 		}
 	}
 
 	int absPi = counter; 
-	int pi = s.size(); 
+	int pi = b.size(); 
 	
 	cout << "absolute value of Pi : " << absPi << endl;
 	cout << "value of pi: " << pi << endl;
 	
 	//finding lower(decimal form of a) and upper(length of a) sigma
-	string t = to_string(a); 
 	
-	int upperSigma = t.size(); 
-	int lowerSigma = stoi(t, nullptr, 2);
+	int upperSigma = a.size(); 
+	int lowerSigma = stoi(a, nullptr, 2);
 
 	cout << "σ value: " << lowerSigma << endl;
 	cout << "Σ value: " << upperSigma << endl;
@@ -120,7 +144,7 @@ int main(){
 	cout << "Σ0 value: " << upperSigma0 << endl;
 
 	//finding scaling term: 2^(σ-Σ0)
-    int scalingTerm = pow (2.0, (lowerSigma - upperSigma0));
+    float scalingTerm = pow (2.0, (lowerSigma - upperSigma0));
     
     cout << "scaling term: " << scalingTerm << endl;
     
@@ -129,7 +153,7 @@ int main(){
     float sp  = (float(absPi)/pi) * scalingTerm; 
     
     cout << "numerical value of the SP number x: " << sp << endl;
-	
-	return 0; 
-}
 
+    return sp;
+	
+}

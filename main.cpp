@@ -133,7 +133,7 @@ bool densityCheck(string a, string b){ // a is σ , b is π
 		return true;
 	}
 	
-	// call the scaling function
+	return false; 
 }
 
 float spFormat(string a, string b){ // a is σ , b is π

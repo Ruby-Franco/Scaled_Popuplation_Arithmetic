@@ -7,6 +7,9 @@ using namespace std;
 
 float spFormat(string, string);
 bool densityCheck(string, string);
+float scalingUnit(string, string , int);
+int shuffleUnit(int);
+
 int main(){
 	//SP-based Skewed Addition
 
@@ -114,7 +117,25 @@ int main(){
 	
 	return 0; 
 }
+int shuffleUnit(int input){
+	return input; 
+}
+float scalingUnit(string a, string b, int beta){
+	int pi = b.size(); 
+	
+	if( 0 < beta && beta <= 1){
 
+	}else if(1 < beta && beta < 2){
+
+	}else if (beta == 2){
+		shuffleUnit(pi);
+	}else if(beta > 2){
+
+	}
+
+	float tmp = beta; // 
+	return tmp; 
+}
 bool densityCheck(string a, string b){ // a is σ , b is π
 	int absPi = 0; 
 

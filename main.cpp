@@ -61,7 +61,7 @@ int main(){
 		myArr[i] = 1;
 	}
 	
-	cout << "mx: " ; 
+	cout << endl << "mx: " ; 
 	for(int i = 0; i < xpi; i++){
 		cout << mxArr[i]; 
 	}
@@ -86,27 +86,31 @@ int main(){
 		tmpY[i] = arrY[i] & myArr[i];
 		cout << tmpY[i];
 	}	
-	cout << endl;
+	cout << endl << endl;
+
+	int scalingTerm = xsigma + ysigma; 
+
+	cout << "Z: (" << bitset<2>(scalingTerm).to_string() << ", ";
+
 
 	int arrZ[xpi];
-	cout << "Z: " ; 
 	for(int i = 0; i < xpi;i++){
 		arrZ[i] = tmpX[i] | tmpY[i];
 		cout << arrZ[i];
 	}
-	cout << endl;
+	cout << ")" <<endl;
 	
 	//SP-format testing
 	
 	string a, b;
-
-	cout << "input first number: " ;
+	cout << endl << "converting SP Format to numerical value " << endl;
+	cout << "input scalingTerm: " ;
 	cin >> a; 
 
 	cout << "input second number: "; 
 	cin >> b; 
 
-	cout << "SP Format: " << endl << spFormat(a,b);
+	cout << endl << spFormat(a,b);
 	
 	return 0; 
 }
@@ -126,7 +130,7 @@ float spFormat(string a, string b){ // a is σ , b is π
 	int absPi = counter; 
 	int pi = b.size(); 
 	
-	cout << "absolute value of Pi : " << absPi << endl;
+	cout << endl << "absolute value of Pi : " << absPi << endl;
 	cout << "value of pi: " << pi << endl;
 	
 	//finding lower(decimal form of a) and upper(length of a) sigma
@@ -152,7 +156,7 @@ float spFormat(string a, string b){ // a is σ , b is π
     
     float sp  = (float(absPi)/pi) * scalingTerm; 
     
-    cout << "numerical value of the SP number x: " << sp << endl;
+    cout << endl << "numerical value of the SP number: " << sp << endl;
 
     return sp;
 	

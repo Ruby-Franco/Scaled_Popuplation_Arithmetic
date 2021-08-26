@@ -6,7 +6,7 @@
 using namespace std; 
 
 float spFormat(string, string);
-
+bool densityCheck(string, string);
 int main(){
 	//SP-based Skewed Addition
 
@@ -113,6 +113,27 @@ int main(){
 	cout << endl << spFormat(a,b);
 	
 	return 0; 
+}
+
+bool densityCheck(string a, string b){ // a is σ , b is π
+	int absPi = 0; 
+
+	for(int i = 0; i < b.size(); i++){
+		//cout << s.at(i) << " "; 
+		if(b.at(i) == 49){
+			absPi++;
+		}
+	}
+
+	int pi = b.size(); 
+
+	int tmp = absPi /pi ; 
+
+	if(tmp > 0.7){
+		return true;
+	}
+	
+	// call the scaling function
 }
 
 float spFormat(string a, string b){ // a is σ , b is π

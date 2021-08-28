@@ -114,6 +114,32 @@ int main(){
 	cin >> b; 
 
 	cout << endl << spFormat(a,b);
+	/// menu
+	int userInput; 
+
+	cout << endl << endl << "Menu Options: " << endl << "1. convert SP number to numerical value " << endl;
+	cout << "2. Skewed addition " << endl << "3. Multiplication " << endl << "4. exit" << endl; 
+	
+	while(cin >> userInput){
+		if(userInput == 1){
+			cout << "input (σ, π): "; 
+			string a, b; 
+			cin >> a; 
+			cin >> b; 
+			cout << "numerical value of the SP number: " << spFormat(a,b);
+		}else if(userInput == 2){
+			cout << "input int xsigma, int ysigma, string xpi, string ypi, string zScal: "; 
+			// call addition function; 
+
+		}else if(userInput == 3){
+
+		}else if(userInput == 4){
+			return 0; 
+		}else{
+			cout << "Invalid input. Please try again " << endl;
+			cin >> userInput;
+		}	
+	}
 	
 	return 0; 
 }

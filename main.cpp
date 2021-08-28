@@ -10,98 +10,115 @@ bool densityCheck(string, string);
 float scalingUnit(string, string , int);
 int shuffleUnit(int);
 
+void addition(int xsigma, int ysigma, string xpi_string, string ypi_string,   string &zScal){
+    
+    int xpi = xpi_string.size(); 
+    int ypi = ypi_string.size();
+    
+    
+    int arrX[xpi];
+    int tmp; 
+    //cout << "x: ";
+ 
+    for(int i = 0; i < xpi; i++){
+        tmp = (int)xpi_string.at(i) - 48;
+        arrX[i] = tmp;
+        //cout << arrX[i];
+    }
+ 
+    int arrY[ypi];
+    int temp;
+    //cout << endl << "y: ";  
+ 
+    for(int i = 0; i < ypi; i++){
+        temp = (int)ypi_string.at(i) - 48;
+        arrY[i] = temp;
+        //cout << arrY[i];
+    }
+ 
+    int mxArr[xpi];
+    int myArr[ypi];
+ 
+    for(int i = 0; i < (xpi/2);i++){
+        mxArr[i] = 1;
+    }
+ 
+    for(int i = xpi/2; i < xpi;i++){
+        mxArr[i] = 0;
+    }
+ 
+    for(int i = 0; i < (ypi/2);i++){
+        myArr[i] = 0;
+    }
+ 
+    for(int i = (ypi/2); i < ypi;i++){
+        myArr[i] = 1;
+    }
+    
+    cout << endl << "mx: " ; 
+    for(int i = 0; i < xpi; i++){
+        cout << mxArr[i]; 
+    }
+    cout << endl << "my: ";
+    for(int i = 0; i < xpi; i++){
+        cout << myArr[i]; 
+    }
+    cout << endl;
+ 
+    int tmpX[xpi];
+    cout << "results of x & mx: "; 
+ 
+    for(int i = 0; i < xpi; i++){
+        tmpX[i] = arrX[i] & mxArr[i];
+        cout << tmpX[i]; 
+    }
+ 
+    int tmpY[ypi];
+    cout << endl << "results of y & my: "; 
+ 
+    for(int i = 0; i < ypi; i++){
+        tmpY[i] = arrY[i] & myArr[i];
+        cout << tmpY[i];
+    }   
+    cout << endl << endl;
+ 
+    int scalingTerm = xsigma + ysigma; 
+ 
+    zScal = bitset<2>(scalingTerm).to_string(); 
+ 
+    // //int arrZ[xpi];
+    // for(int i = 0; i < xpi;i++){
+    //  Z[i] = tmpX[i] | tmpY[i];
+    //  //cout << arrZ[i];
+    // }
+    // //cout << ")" <<endl;
+}
+
+
 int main(){
-	//SP-based Skewed Addition
+	 //SP-based Skewed Addition
+    int xSigma, ySigma;
+    
+    string zscal;
+    string xpi_String, ypi_String; 
+ 
+    cout << "input x: "; 
+    cin >> xSigma >> xpi_String;
+    cout << "input y: " ; 
+    cin >> ySigma >> ypi_String;
+ 
+    int z[xpi_String.size()]; 
+ 
+    
+    addition(xSigma, ySigma, xpi_String, ypi_String, zscal);
+ 
+    cout << "Z: (" << zscal << ", ";
+    
+    //for(int i = 0; i < xpi_String.size();i++){
+    //  cout << z[i];
+    // }
+    // cout << ")" <<endl;
 
-	int xsigma, ysigma;
-	string xpi_string, ypi_string; 
-
-	cout << "input x: "; 
-	cin >> xsigma >> xpi_string;
-
-	cout << "input y: " ; 
-	cin >> ysigma >> ypi_string;
-
-	int xpi = xpi_string.size(); 
-	int ypi = ypi_string.size();
-
-	int arrX[xpi];
-	int tmp; 
-	//cout << "x: ";
-
-	for(int i = 0; i < xpi; i++){
-		tmp = (int)xpi_string.at(i) - 48;
-		arrX[i] = tmp;
-		//cout << arrX[i];
-	}
-
-	int arrY[ypi];
-	int temp;
-	//cout << endl << "y: ";  
-
-	for(int i = 0; i < ypi; i++){
-		temp = (int)ypi_string.at(i) - 48;
-		arrY[i] = temp;
-		//cout << arrY[i];
-	}
-
-	int mxArr[xpi];
-	int myArr[ypi];
-
-	for(int i = 0; i < (xpi/2);i++){
-		mxArr[i] = 1;
-	}
-
-	for(int i = xpi/2; i < xpi;i++){
-		mxArr[i] = 0;
-	}
-
-	for(int i = 0; i < (ypi/2);i++){
-		myArr[i] = 0;
-	}
-
-	for(int i = (ypi/2); i < ypi;i++){
-		myArr[i] = 1;
-	}
-	
-	cout << endl << "mx: " ; 
-	for(int i = 0; i < xpi; i++){
-		cout << mxArr[i]; 
-	}
-	cout << endl << "my: ";
-	for(int i = 0; i < xpi; i++){
-		cout << myArr[i]; 
-	}
-	cout << endl;
-
-	int tmpX[xpi];
-	cout << "results of x & mx: "; 
-
-	for(int i = 0; i < xpi; i++){
-		tmpX[i] = arrX[i] & mxArr[i];
-		cout << tmpX[i]; 
-	}
-
-	int tmpY[ypi];
-	cout << endl << "results of y & my: "; 
-
-	for(int i = 0; i < ypi; i++){
-		tmpY[i] = arrY[i] & myArr[i];
-		cout << tmpY[i];
-	}	
-	cout << endl << endl;
-
-	int scalingTerm = xsigma + ysigma; 
-
-	cout << "Z: (" << bitset<2>(scalingTerm).to_string() << ", ";
-
-
-	int arrZ[xpi];
-	for(int i = 0; i < xpi;i++){
-		arrZ[i] = tmpX[i] | tmpY[i];
-		cout << arrZ[i];
-	}
-	cout << ")" <<endl;
 	
 	//SP-format testing
 	

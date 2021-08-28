@@ -147,19 +147,39 @@ int shuffleUnit(int input){
 	return input; 
 }
 float scalingUnit(string a, string b, int beta){
-	int pi = b.size(); 
-	
-	if( 0 < beta && beta <= 1){
+	int pi[b.size()];
+	int temp; 
 
-	}else if(1 < beta && beta < 2){
-
-	}else if (beta == 2){
-		shuffleUnit(pi);
-	}else if(beta > 2){
-
+	for(int i = 0; i < b.size(); i++){
+		temp = (int)b.at(i) - 48;
+		pi[i] = temp;
+		cout << pi[i];
 	}
 
-	float tmp = beta; // 
+
+	if( 0 < beta && beta <= 1){
+		// implement mask M
+		// pi AND M 
+		// shuffle
+		//increase σ by 1/β
+		//When β = 1, the density of the population vector π doesn’t change
+
+	}else if(1 < beta && beta < 2){
+		//scale down π by β2 by using the mask Mβ with density of 1’s being β/2, 
+		// this = pi prime
+		//pi' = pi&Mb/2
+		//double the density of π′ by using the following equation:
+		//πd = (π′|π′s)|(π′&π′s)
+	}else if (beta == 2){
+		//cout << shuffleUnit(pi);
+		//πd = (π′|π′s)|(π′&π′s)
+
+	}else if(beta > 2){
+		// repeatedly double |π| until the remaining adjustment ratio is less than 2. 
+		//Then we can use the methods mentioned above to compute π · β.
+	}
+
+	float tmp = 2.0; 
 	return tmp; 
 }
 bool densityCheck(string a, string b){ // a is σ , b is π

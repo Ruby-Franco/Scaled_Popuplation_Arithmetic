@@ -181,7 +181,7 @@ float scalingUnit(string a, string b){
 	
     return sigma; 
 }
-}
+
 bool densityCheck(string a, string b){ // a is σ , b is π
 	int absPi = 0; 
 

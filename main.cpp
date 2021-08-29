@@ -158,17 +158,26 @@ int main(){
 	return 0; 
 }
 float scalingUnit(string a, string b){
-	int pi[b.size()];
-	int temp; 
+	int absPi = 0; 
 
 	for(int i = 0; i < b.size(); i++){
-		temp = (int)b.at(i) - 48;
-		pi[i] = temp;
-		cout << pi[i];
+		//cout << s.at(i) << " "; 
+		if(b.at(i) == 49){
+			absPi++;
+		}
 	}
 
-	float tmp = 2.0; // temp fix 
-	return tmp; 
+	int pi = b.size(); 
+
+	float tmp = absPi /pi ; 
+
+    float beta = 0.7 / tmp; 
+
+    int sigma_new = (log10 (beta))/(log10 (2)) ;
+    int sigma= -sigma_new;
+    
+	
+    return sigma; 
 }
 bool densityCheck(string a, string b){ // a is σ , b is π
 	int absPi = 0; 

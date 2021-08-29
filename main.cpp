@@ -96,41 +96,6 @@ void addition(int xsigma, int ysigma, string xpi_string, string ypi_string, stri
 
 
 int main(){
-    //SP-based Skewed Addition
-    int xSigma, ySigma;
-    
-    string zscal;
-    string xpi_String, ypi_String; 
- 
-    cout << "input x: "; 
-    cin >> xSigma >> xpi_String;
-    cout << "input y: " ; 
-    cin >> ySigma >> ypi_String;
- 
-    int z[xpi_String.size()]; 
- 
-    
-    addition(xSigma, ySigma, xpi_String, ypi_String, zscal, z);
- 
-    cout << "Z: (" << zscal << ", ";
-    
-    for(int i = 0; i < xpi_String.size();i++){
-      cout << z[i];
-    }
-    cout << ")" <<endl;
-	
-	//SP-format testing
-	
-	string a, b;
-	cout << endl << "converting SP Format to numerical value " << endl;
-	cout << "input scalingTerm: " ;
-	cin >> a; 
-
-	cout << "input second number: "; 
-	cin >> b; 
-
-	cout << endl << spFormat(a,b);
-	/// menu
 	int userInput; 
 
 	cout << endl << endl << "Menu Options: " << endl << "1. convert SP number to numerical value " << endl;
@@ -142,11 +107,31 @@ int main(){
 			string a, b; 
 			cin >> a; 
 			cin >> b; 
-			cout << "numerical value of the SP number: " << spFormat(a,b);
+			cout << "numerical value of the SP number: " << spFormat(a,b) << endl;
 		}else if(userInput == 2){
-			cout << "input int xsigma, int ysigma, string xpi, string ypi, string zScal: "; 
-			// call addition function; 
-
+			//SP-based Skewed Addition
+    		int xSigma, ySigma;
+    
+    		string zscal;
+    		string xpi_String, ypi_String; 
+ 
+		    cout << "input x(σ, π): "; 
+		    cin >> xSigma >> xpi_String;
+		    cout << "input y(σ, π): " ; 
+		    cin >> ySigma >> ypi_String;
+		 
+		    int z[xpi_String.size()]; 
+		 
+		    
+		    addition(xSigma, ySigma, xpi_String, ypi_String, zscal, z);
+		 
+		    cout << "Z: (" << zscal << ", ";
+		    
+		    for(int i = 0; i < xpi_String.size();i++){
+		      cout << z[i];
+		    }
+		    cout << ")" <<endl;
+	
 		}else if(userInput == 3){
 
 		}else if(userInput == 4){

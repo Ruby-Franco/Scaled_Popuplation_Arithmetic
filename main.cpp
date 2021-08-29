@@ -7,7 +7,7 @@ using namespace std;
 
 float spFormat(string, string);
 bool densityCheck(string, string);
-float scalingUnit(string, string , int);
+float scalingUnit(string, string);
 int shuffleUnit(int);
 
 void addition(int xsigma, int ysigma, string xpi_string, string ypi_string, string &zScal, int z[]){
@@ -86,7 +86,7 @@ void addition(int xsigma, int ysigma, string xpi_string, string ypi_string, stri
  
     zScal = bitset<2>(scalingTerm).to_string(); 
  
-     z[xpi];
+    //z[xpi];
      for(int i = 0; i < xpi;i++){
       z[i] = tmpX[i] | tmpY[i];
       //cout << arrZ[i];
@@ -97,7 +97,7 @@ void addition(int xsigma, int ysigma, string xpi_string, string ypi_string, stri
 
 int main(){
 	int userInput; 
-	string menu = "\n Menu Options: \n 1. convert SP number to numerical value \n 2. Skewed addition \n 3. Density Check \n 4. Scaling Unit \n 5. exit \n";
+	string menu = "\n Menu Options: \n 1. convert SP number to numerical value \n 2. Skewed addition \n 3. Density Check \n 4. exit \n";
 
 	cout << menu;
 	while(cin >> userInput){
@@ -141,14 +141,12 @@ int main(){
 			if(densityCheck(sigma, pi) == true){
 				cout << "Density is larger 70%." << endl;
 			}else{
-				cout << "Density less than 70%. Perform Scaling." << endl;
+				cout << "Density less than 70%. Performing Scaling." << endl;
+				cout << scalingUnit(sigma, pi) << endl;
 			}
 			cout << "Please input another menu option." << endl << menu;
 			cin >> userInput; 
 		}else if(userInput == 4){
-			cout << "Please input another menu option." << endl << menu;
-			cin >> userInput; 
-		}else if(userInput == 5){
 			cout << "Exiting program. Have a good day!" << endl;
 			return 0; 
 		}else{
@@ -159,7 +157,7 @@ int main(){
 	
 	return 0; 
 }
-float scalingUnit(string a, string b, int beta){
+float scalingUnit(string a, string b){
 	int pi[b.size()];
 	int temp; 
 
@@ -169,7 +167,7 @@ float scalingUnit(string a, string b, int beta){
 		cout << pi[i];
 	}
 
-	float tmp = 2.0; 
+	float tmp = 2.0; // temp fix 
 	return tmp; 
 }
 bool densityCheck(string a, string b){ // a is σ , b is π
@@ -233,8 +231,6 @@ float spFormat(string a, string b){ // a is σ , b is π
     //finding SP Number 
     
     float sp  = (float(absPi)/pi) * scalingTerm; 
-    
-    cout << endl << "numerical value of the SP number: " << sp << endl;
 
     return sp;
 	

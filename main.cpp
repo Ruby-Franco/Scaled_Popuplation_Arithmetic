@@ -10,7 +10,7 @@ bool densityCheck(string, string);
 float scalingUnit(string, string , int);
 int shuffleUnit(int);
 
-void addition(int xsigma, int ysigma, string xpi_string, string ypi_string,   string &zScal){
+void addition(int xsigma, int ysigma, string xpi_string, string ypi_string, string &zScal, int z[]){
     
     int xpi = xpi_string.size(); 
     int ypi = ypi_string.size();
@@ -86,17 +86,17 @@ void addition(int xsigma, int ysigma, string xpi_string, string ypi_string,   st
  
     zScal = bitset<2>(scalingTerm).to_string(); 
  
-    // //int arrZ[xpi];
-    // for(int i = 0; i < xpi;i++){
-    //  Z[i] = tmpX[i] | tmpY[i];
-    //  //cout << arrZ[i];
-    // }
-    // //cout << ")" <<endl;
+     z[xpi];
+     for(int i = 0; i < xpi;i++){
+      z[i] = tmpX[i] | tmpY[i];
+      //cout << arrZ[i];
+     }
+     //cout << ")" <<endl;
 }
 
 
 int main(){
-	 //SP-based Skewed Addition
+    //SP-based Skewed Addition
     int xSigma, ySigma;
     
     string zscal;
@@ -110,15 +110,14 @@ int main(){
     int z[xpi_String.size()]; 
  
     
-    addition(xSigma, ySigma, xpi_String, ypi_String, zscal);
+    addition(xSigma, ySigma, xpi_String, ypi_String, zscal, z);
  
     cout << "Z: (" << zscal << ", ";
     
-    //for(int i = 0; i < xpi_String.size();i++){
-    //  cout << z[i];
-    // }
-    // cout << ")" <<endl;
-
+    for(int i = 0; i < xpi_String.size();i++){
+      cout << z[i];
+    }
+    cout << ")" <<endl;
 	
 	//SP-format testing
 	

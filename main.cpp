@@ -182,7 +182,7 @@ bool densityCheck(string a, string b){ // a is σ , b is π
 
 	int pi = b.size(); 
 
-	int tmp = absPi /pi ; 
+	float tmp = absPi /pi ; 
 
 	if(tmp > 0.7){
 		return true;

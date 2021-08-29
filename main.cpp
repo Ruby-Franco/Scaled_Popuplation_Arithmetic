@@ -97,10 +97,9 @@ void addition(int xsigma, int ysigma, string xpi_string, string ypi_string, stri
 
 int main(){
 	int userInput; 
+	string menu = "\n Menu Options: \n 1. convert SP number to numerical value \n 2. Skewed addition \n 3. Multiplication \n 4. exit \n";
 
-	cout << endl << endl << "Menu Options: " << endl << "1. convert SP number to numerical value " << endl;
-	cout << "2. Skewed addition " << endl << "3. Multiplication " << endl << "4. exit" << endl; 
-	
+	cout << menu;
 	while(cin >> userInput){
 		if(userInput == 1){
 			cout << "input (σ, π): "; 
@@ -108,8 +107,10 @@ int main(){
 			cin >> a; 
 			cin >> b; 
 			cout << "numerical value of the SP number: " << spFormat(a,b) << endl;
+			cout << "Please input another menu option" << endl;
+			cout << menu; 
+			cin >> userInput; 
 		}else if(userInput == 2){
-			//SP-based Skewed Addition
     		int xSigma, ySigma;
     
     		string zscal;
@@ -130,14 +131,18 @@ int main(){
 		    for(int i = 0; i < xpi_String.size();i++){
 		      cout << z[i];
 		    }
-		    cout << ")" <<endl;
+		    cout << ")" << endl;
+		    cout << "Please input another menu option." << endl << menu;
+			cin >> userInput; 
 	
 		}else if(userInput == 3){
-
+			cout << "Please input another menu option." << endl << menu;
+			cin >> userInput; 
 		}else if(userInput == 4){
+			cout << "Exiting program. Have a good day!" << endl;
 			return 0; 
 		}else{
-			cout << "Invalid input. Please try again " << endl;
+			cout << "Invalid input. Please try again." << endl << menu;
 			cin >> userInput;
 		}	
 	}

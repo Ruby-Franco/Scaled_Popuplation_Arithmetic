@@ -169,15 +169,18 @@ float scalingUnit(string a, string b){
 
 	int pi = b.size(); 
 
-	float tmp = absPi /pi ; 
+	float tmp = float(absPi) /pi ; 
+	cout <<tmp <<endl; 
 
     float beta = 0.7 / tmp; 
+    cout << beta <<endl; 
 
     int sigma_new = (log10 (beta))/(log10 (2)) ;
     int sigma= -sigma_new;
     
 	
     return sigma; 
+}
 }
 bool densityCheck(string a, string b){ // a is σ , b is π
 	int absPi = 0; 

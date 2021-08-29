@@ -97,7 +97,7 @@ void addition(int xsigma, int ysigma, string xpi_string, string ypi_string, stri
 
 int main(){
 	int userInput; 
-	string menu = "\n Menu Options: \n 1. convert SP number to numerical value \n 2. Skewed addition \n 3. Multiplication \n 4. exit \n";
+	string menu = "\n Menu Options: \n 1. convert SP number to numerical value \n 2. Skewed addition \n 3. Density Check \n 4. Scaling Unit \n 5. exit \n";
 
 	cout << menu;
 	while(cin >> userInput){
@@ -123,7 +123,6 @@ int main(){
 		 
 		    int z[xpi_String.size()]; 
 		 
-		    
 		    addition(xSigma, ySigma, xpi_String, ypi_String, zscal, z);
 		 
 		    cout << "Z: (" << zscal << ", ";
@@ -136,9 +135,20 @@ int main(){
 			cin >> userInput; 
 	
 		}else if(userInput == 3){
+			string sigma, pi; 
+			cout << "input (σ, π): " ;
+			cin >> sigma >> pi; 
+			if(densityCheck(sigma, pi) == true){
+				cout << "Density is larger 70%." << endl;
+			}else{
+				cout << "Density less than 70%. Perform Scaling." << endl;
+			}
 			cout << "Please input another menu option." << endl << menu;
 			cin >> userInput; 
 		}else if(userInput == 4){
+			cout << "Please input another menu option." << endl << menu;
+			cin >> userInput; 
+		}else if(userInput == 5){
 			cout << "Exiting program. Have a good day!" << endl;
 			return 0; 
 		}else{

@@ -100,7 +100,8 @@ int main(){
 	string menu = "\n Menu Options: \n 1. convert SP number to numerical value \n 2. Skewed addition \n 3. Density Check \n 4. exit \n";
 
 	cout << menu;
-	while(cin >> userInput){
+	cin >> userInput;
+	while(userInput != 4){
 		if(userInput == 1){
 			cout << "input (σ, π): "; 
 			string a, b; 

@@ -177,6 +177,10 @@ float scalingUnit(string a, string b){
 
     int sigma_new = (log10 (beta))/(log10 (2)) ;
     int sigma= -sigma_new;
+	cout << sigma <<endl; 
+    
+    int new_pi = absPi * beta;
+    cout << new_pi <<endl; 
     
 	
     return sigma; 

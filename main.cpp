@@ -8,7 +8,8 @@ using namespace std;
 float spFormat(string, string);
 bool densityCheck(string, string);
 float scalingUnit(string, string);
-int shuffleUnit(int);
+string generator(float);
+string decTObin(float);
 
 void addition(int xsigma, int ysigma, string xpi_string, string ypi_string, string &zScal, int z[]){
     
@@ -93,8 +94,41 @@ void addition(int xsigma, int ysigma, string xpi_string, string ypi_string, stri
      }
      //cout << ")" <<endl;
 }
+string decTObin(float input){ //helper function decimal to binary
+	int quotient = input * pow(2.0, 8.0); 
+	string result = "0."; 
+	string str ;
 
+	while(quotient > 0){
+		int remainder = quotient % 2; 
+		quotient = quotient/2; 
+		str = bitset<1>(remainder).to_string(); 
+		result.append(str);
+	} 
+	result.append("0");
+	return result; 
+}
+string generator(float tmp){
+	string input = decTObin(tmp);
+	cout << input << endl;
+	input = input.substr(2,4);
+	cout << "input: " << input << endl;
 
+	int counter = 0; 
+	string result; 
+	int cpycounter = 0; 
+
+	for(int i = input.size() - 1; i >= 1; i--){
+		int numOfCopies = pow(2.0 , counter); 
+		counter++; 
+		while(cpycounter < numOfCopies){
+			result = result + input.at(i);
+			cpycounter++; 
+		}
+		cpycounter = 0;
+	}
+	return result;
+}
 int main(){
 	int userInput; 
 	string menu = "\n Menu Options: \n 1. convert SP number to numerical value \n 2. Skewed addition \n 3. Density Check \n 4. exit \n";

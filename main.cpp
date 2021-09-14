@@ -193,54 +193,69 @@ int main(){
 	return 0; 
 }
 float scalingUnit(string a, string b){
-	int absPi = 0; 
+    int absPi = 0; 
+ 
+    for(int i = 0; i < b.size(); i++){
+        //cout << s.at(i) << " "; 
+        if(b.at(i) == 49){
+            absPi++;
+        }
+    }
+ 
+    int pi = b.size(); 
+ 
+    float tmp = float(absPi) /pi ; 
+ 
+    int count = 0;
+ 
+    while (tmp < 0.5){
+        tmp = tmp * 2;
+        count++;
+    }
+ 
+ 
+    //float beta = 0.5 / tmp; 
+    float beta = pow (2.0, count);
+    cout << "Beta "<< beta <<endl; 
+    //float invBeta = 1 / beta; 
+ 
+    //float x = (log10 (invBeta))/(log10 (2)) ;
+    //cout << x <<endl; 
+    
+    float numA = stoi(a, nullptr, 2);
+    cout << "numerical A: " << numA << endl;
+    
+    float sigmaNew = count; //numerical answer turn to binary? 
+    cout << "new sigma "<<sigmaNew  <<endl; 
+    int new_pi = absPi * count;
+    cout << "new pi "<< new_pi <<endl; 
 
-	for(int i = 0; i < b.size(); i++){
-		//cout << s.at(i) << " "; 
-		if(b.at(i) == 49){
-			absPi++;
-		}
-	}
+    for(int i = 0; i <= pi; i++){
 
-	int pi = b.size(); 
-
-	float tmp = float(absPi) /pi ; 
-
-    float beta = 0.7 / tmp; 
-	float invBeta = 1 / beta; 
-
-    float x = (log10 (invBeta))/(log10 (2)) ;
-	cout << x <<endl; 
-	
-	float numA = stoi(a, nullptr, 2);
-	cout << "numerical A: " << numA << endl;
-	
-    float sigmaNew;
-    int new_pi = absPi * beta;
-    cout << new_pi <<endl; 
-	
-    return sigmaNew; 
+    }
+    
+    return 0; 
 }
-
+ 
 bool densityCheck(string a, string b){ // a is σ , b is π
-	int absPi = 0; 
-
-	for(int i = 0; i < b.size(); i++){
-		//cout << s.at(i) << " "; 
-		if(b.at(i) == 49){
-			absPi++;
-		}
-	}
-
-	int pi = b.size(); 
-
-	float tmp = float(absPi) /pi ; 
-
-	if(tmp > 0.7){
-		return true;
-	}
-	
-	return false; 
+    int absPi = 0; 
+ 
+    for(int i = 0; i < b.size(); i++){
+        //cout << s.at(i) << " "; 
+        if(b.at(i) == 49){
+            absPi++;
+        }
+    }
+ 
+    int pi = b.size(); 
+ 
+    float tmp = float(absPi) /pi ; 
+ 
+    if(tmp >= 0.5){
+        return true;
+    }
+    
+    return false; 
 }
 
 float spFormat(string a, string b){ // a is σ , b is π

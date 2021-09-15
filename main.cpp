@@ -163,9 +163,21 @@ int main(){
 	float inputA;
 	float inputB;  
 
+	ofstream oFS; 
+	oFS.open("results.txt");
+
+	if(!oFS.is_open()){
+		cout << "Error." << endl;
+		exit(1);
+	}
+
+	oFS << "InputA	InputB	Product " << endl;
+
+
 	while(inFS >> inputA){
 		inFS >> inputB; 
-		cout << inputA<< " " << inputB << endl;
+		oFS << fixed << setprecision(2) << inputA << "	" << inputB << "	" ;
+		oFS <<fixed << setprecision(2) << (inputA*inputB) << endl;
 	}
 	
 	return 0; 

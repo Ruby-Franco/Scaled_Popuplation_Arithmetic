@@ -94,18 +94,44 @@ void addition(int xsigma, int ysigma, string xpi_string, string ypi_string, stri
      }
      //cout << ")" <<endl;
 }
+
 string decTObin(float input){ //helper function decimal to binary
 	int quotient = input * pow(2.0, 8.0); 
-	string result = "0."; 
+	string backwardsResult;  
 	string str ;
 
 	while(quotient > 0){
 		int remainder = quotient % 2; 
 		quotient = quotient/2; 
 		str = bitset<1>(remainder).to_string(); 
-		result.append(str);
+		backwardsResult.append(str);
 	} 
-	result.append("0");
+
+	string result; 
+	string tmp; 
+	for(int i = backwardsResult.size()-1; i >=0; i--){
+		tmp = backwardsResult.at(i);
+		result.append(tmp);
+	}
+
+	int shiftCounter = -1; 
+
+	for(int i = result.size();i >= 0; i--){
+		shiftCounter ++; 
+		if(shiftCounter == 8){
+			result.insert(i, ".");
+		}
+	}
+
+	while(shiftCounter < 8){
+		result.insert(0, "0");
+		shiftCounter++; 
+		if(shiftCounter == 8){
+			result.insert(0, ".");
+		}
+	}
+
+
 	return result; 
 }
 string generator(float tmp){

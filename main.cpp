@@ -130,64 +130,42 @@ string generator(float tmp){
 	return result;
 }
 int main(){
-	int userInput; 
-	string menu = "\n Menu Options: \n 1. convert SP number to numerical value \n 2. Skewed addition \n 3. Density Check \n 4. exit \n";
+	string fileName; 
+	cout << "Enter file name: " << endl;
+	cin >> fileName; 
 
-	cout << menu;
-	cin >> userInput;
-	while(userInput != 4){
-		if(userInput == 1){
-			cout << "input (σ, π): "; 
-			string a, b; 
-			cin >> a; 
-			cin >> b; 
-			cout << "numerical value of the SP number: " << spFormat(a,b) << endl;
-			cout << "Please input another menu option" << endl;
-			cout << menu; 
-			cin >> userInput; 
-		}else if(userInput == 2){
-    		int xSigma, ySigma;
-    
-    		string zscal;
-    		string xpi_String, ypi_String; 
- 
-		    cout << "input x(σ, π): "; 
-		    cin >> xSigma >> xpi_String;
-		    cout << "input y(σ, π): " ; 
-		    cin >> ySigma >> ypi_String;
-		 
-		    int z[xpi_String.size()]; 
-		 
-		    addition(xSigma, ySigma, xpi_String, ypi_String, zscal, z);
-		 
-		    cout << "Z: (" << zscal << ", ";
-		    
-		    for(int i = 0; i < xpi_String.size();i++){
-		      cout << z[i];
-		    }
-		    cout << ")" << endl;
-		    cout << "Please input another menu option." << endl << menu;
-			cin >> userInput; 
-	
-		}else if(userInput == 3){
-			string sigma, pi; 
-			cout << "input (σ, π): " ;
-			cin >> sigma >> pi; 
-			if(densityCheck(sigma, pi) == true){
-				cout << "Density is larger 70%." << endl;
-			}else{
-				cout << "Density less than 70%. Performing Scaling." << endl;
-				cout << scalingUnit(sigma, pi) << endl;
-			}
-			cout << "Please input another menu option." << endl << menu;
-			cin >> userInput; 
-		}else if(userInput == 4){
-			cout << "Exiting program. Have a good day!" << endl;
-			return 0; 
-		}else{
-			cout << "Invalid input. Please try again." << endl << menu;
-			cin >> userInput;
-		}	
+	ofstream outFS; 
+	outFS.open(fileName);
+
+	if(!outFS.is_open()){
+		cout << "Error." << endl;
+		exit(1);
+	}
+
+	int counter = 0; 
+	srand( (unsigned)time( NULL ) );
+	while(counter < 100){
+		outFS << fixed << setprecision(2) << (float) rand()/RAND_MAX << " " << (float) rand()/RAND_MAX << endl ; 
+		counter++; 
+	}
+	cout << "numbers created " << endl;
+
+	outFS.close(); 
+
+	ifstream inFS; 
+	inFS.open(fileName);
+
+	if(!inFS.is_open()){
+		cout << "Could not open file "  << endl;
+		exit(1);
+	}
+
+	float inputA;
+	float inputB;  
+
+	while(inFS >> inputA){
+		inFS >> inputB; 
+		cout << inputA<< " " << inputB << endl;
 	}
 	
 	return 0; 

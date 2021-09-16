@@ -10,6 +10,8 @@ bool densityCheck(string, string);
 float scalingUnit(string, string);
 string generator(float);
 string decTObin(float);
+string multiplicationPi(string, string);
+string multiplicationSigma(string, string);
 
 void addition(int xsigma, int ysigma, string xpi_string, string ypi_string, string &zScal, int z[]){
     
@@ -155,6 +157,45 @@ string generator(float tmp){
 	}
 	return result;
 }
+
+string multiplicationPi(string piA, string piB){
+	// πz = πx&πy
+
+	int arrSize = piA.size(); 
+
+	int arrA[arrSize];
+	for(int i = 0; i < piA.size(); i++){
+		arrA[i] = piA.at(i);
+	} 
+
+	int arrB[arrSize];
+	for(int i = 0; i < piB.size(); i++){
+		arrB[i] = piB.at(i);
+	} 
+
+	int arrResult[arrSize];
+	for(int i = 0; i < piA.size(); i++){
+		arrResult[i] = arrA[i] & arrB[i];
+	}
+
+	string result;
+	for(int i = 0; i < arrSize; i++){
+		string tmp = bitset<1>(arrResult[i]).to_string();
+		result.append(tmp);
+	}
+
+	return result; 
+}
+string multiplicationSigma(string sigmaA, string sigmaB){
+	int upperSigma = sigmaA.size(); 
+	int upperSigma0 = pow (2.0, (upperSigma - 1));
+	//cout << "upperSigma0: " << upperSigma0 ; 
+
+	//int result = sigmaA + sigmaB ; //- upperSigma0; 
+
+	return "01"; 
+	//σz = σx+σy−Σ0.
+}
 int main(){
 	string fileName; 
 	cout << "Enter file name: " << endl;
@@ -197,15 +238,48 @@ int main(){
 		exit(1);
 	}
 
-	oFS << "InputA	InputB	Product " << endl;
+	oFS << "InputA	InputB	Product  A_in_Bin	B_in_Bin		AGenerator			BGenerator		DensityCheckA		DensityCheckB	Multiplication 		Numerical " << endl;
 
 
 	while(inFS >> inputA){
 		inFS >> inputB; 
 		oFS << fixed << setprecision(2) << inputA << "	" << inputB << "	" ;
-		oFS <<fixed << setprecision(2) << (inputA*inputB) << endl;
+		oFS <<fixed << setprecision(2) << (inputA*inputB) << "	";
+
+		string A = decTObin(inputA);
+		string B = decTObin(inputB);
+
+		oFS << A << "	" << B << "		"; 
+
+		string sigmaA = "01"; 
+		string sigmaB = "01"; 
+		string piA = generator(inputA); 
+		string piB = generator(inputB) ; 
+
+		oFS << "(" << sigmaA << ", " << piA << ")		" << "(" << sigmaB << ", " << piB << ")		"; 
+
+
+		if(densityCheck(sigmaA, piA) == true){
+			oFS << "pass " << "					" ;
+		}else{
+			oFS << "fail					";
+			scalingUnit(sigmaB, piB);
+		}
+
+		if(densityCheck(sigmaB, piB) == true){
+			oFS << "pass " << "			" ;
+		}else{
+			scalingUnit(sigmaB, piB);
+			oFS << "fail" << "			" ;
+		}
+
+		oFS << "( " <<  multiplicationSigma(sigmaA, sigmaB) << ", " << multiplicationPi(piA, piB) << ")			";
+
+		string newSigma = multiplicationSigma(sigmaA, sigmaB); 
+		string newPi = multiplicationPi(piA, piB); 
+		oFS << spFormat(newSigma, newPi) << endl ;
 	}
-	
+
 	return 0; 
 }
 float scalingUnit(string a, string b){

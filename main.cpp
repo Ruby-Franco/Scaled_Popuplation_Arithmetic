@@ -242,7 +242,7 @@ float scalingUnit(string a, string b){
     cout << "new pi "<< new_pi <<endl; 
 
     for(int i = 0; i <= pi; i++){
-	// this for loop shud add the 1's into new_pi
+	// this for loop shud add the 1's into pi // new_pi is how many 1's
     }  
     return 0; 
 }

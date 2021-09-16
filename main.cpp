@@ -210,18 +210,14 @@ int main(){
 }
 float scalingUnit(string a, string b){
     int absPi = 0; 
- 
     for(int i = 0; i < b.size(); i++){
-        //cout << s.at(i) << " "; 
         if(b.at(i) == 49){
             absPi++;
         }
     }
  
     int pi = b.size(); 
- 
     float tmp = float(absPi) /pi ; 
- 
     int count = 0;
  
     while (tmp < 0.5){
@@ -229,15 +225,14 @@ float scalingUnit(string a, string b){
         count++;
     }
  
- 
     //float beta = 0.5 / tmp; 
+	
     float beta = pow (2.0, count);
     cout << "Beta "<< beta <<endl; 
+	
     //float invBeta = 1 / beta; 
- 
     //float x = (log10 (invBeta))/(log10 (2)) ;
-    //cout << x <<endl; 
-    
+    //cout << x <<endl;   
     float numA = stoi(a, nullptr, 2);
     cout << "numerical A: " << numA << endl;
     
@@ -247,9 +242,8 @@ float scalingUnit(string a, string b){
     cout << "new pi "<< new_pi <<endl; 
 
     for(int i = 0; i <= pi; i++){
-
-    }
-    
+	// this for loop shud add the 1's into new_pi
+    }  
     return 0; 
 }
  

@@ -412,7 +412,7 @@ int main(){
 		oFS << actual;
 		oFS << ",		" << fixed << setprecision(2) << expected << ",";
 
-		float error = abs( (actual - expected) )* 100;
+		float error = abs( float(actual - expected) );
 
 		oFS << "		 " << error << endl;
 

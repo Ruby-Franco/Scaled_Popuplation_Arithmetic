@@ -2,12 +2,14 @@
 #include <string>
 #include <bitset>
 #include <math.h> 
+#include <stdlib.h>
+#include <fstream>
 
 using namespace std; 
 
-float spFormat(string, string);
+float numFormat(string, string);
 bool densityCheck(string, string);
-float scalingUnit(string, string);
+void scalingUnit(string, string, string& , string&);
 string generator(float);
 string decTObin(float);
 string multiplicationPi(string, string);
@@ -96,6 +98,46 @@ void addition(int xsigma, int ysigma, string xpi_string, string ypi_string, stri
      }
      //cout << ")" <<endl;
 }
+string multiplicationPi(string piA, string piB){
+	// πz = πx&πy
+
+	int arrSize = piA.size(); 
+
+	int arrA[arrSize];
+	for(int i = 0; i < piA.size(); i++){
+		arrA[i] = piA.at(i);
+	} 
+
+	int arrB[arrSize];
+	for(int i = 0; i < piB.size(); i++){
+		arrB[i] = piB.at(i);
+	} 
+
+	int arrResult[arrSize];
+	for(int i = 0; i < piA.size(); i++){
+		arrResult[i] = arrA[i] & arrB[i];
+	}
+
+	string result;
+	for(int i = 0; i < arrSize; i++){
+		string tmp = bitset<1>(arrResult[i]).to_string();
+		result.append(tmp);
+	}
+
+	return result; 
+}
+string multiplicationSigma(string sigmaA, string sigmaB){
+
+	int numA = stoi(sigmaA, nullptr, 2);;
+	int numB = stoi(sigmaB, nullptr, 2);;
+
+	int result = numA + numB; 
+
+	string tmp = decTObin(result);
+	string resultString = tmp.substr(0, 2);
+
+	return resultString; 
+}
 
 string decTObin(float input){ //helper function decimal to binary
 	int quotient = input * pow(2.0, 8.0); 
@@ -138,9 +180,9 @@ string decTObin(float input){ //helper function decimal to binary
 }
 string generator(float tmp){
 	string input = decTObin(tmp);
-	cout << input << endl;
+	//cout << input << endl;
+
 	input = input.substr(2,4);
-	cout << "input: " << input << endl;
 
 	int counter = 0; 
 	string result; 
@@ -157,112 +199,85 @@ string generator(float tmp){
 	}
 	return result;
 }
-
-string multiplicationPi(string piA, string piB){
-	// πz = πx&πy
-
-	int arrSize = piA.size(); 
-
-	int arrA[arrSize];
-	for(int i = 0; i < piA.size(); i++){
-		arrA[i] = piA.at(i);
-	} 
-
-	int arrB[arrSize];
-	for(int i = 0; i < piB.size(); i++){
-		arrB[i] = piB.at(i);
-	} 
-
-	int arrResult[arrSize];
-	for(int i = 0; i < piA.size(); i++){
-		arrResult[i] = arrA[i] & arrB[i];
-	}
-
-	string result;
-	for(int i = 0; i < arrSize; i++){
-		string tmp = bitset<1>(arrResult[i]).to_string();
-		result.append(tmp);
-	}
-
-	return result; 
-}
-string multiplicationSigma(string sigmaA, string sigmaB){
-	int upperSigma = sigmaA.size(); 
-	int upperSigma0 = pow (2.0, (upperSigma - 1));
-	//cout << "upperSigma0: " << upperSigma0 ; 
-
-	//int result = sigmaA + sigmaB - upperSigma0; 
-
-	return "01"; // placeholder for now
-	//σz = σx+σy−Σ0.
-}
-float scalingUnit(string a, string b){
-    int absPi = 0; 
+void scalingUnit(string a, string b, string& newSigma, string& piNew){
+	int absPi = 0; 
     for(int i = 0; i < b.size(); i++){
-        if(b.at(i) == 49){
+        if(b.at(i) == 49){ // counts the 1's
             absPi++;
         }
     }
  
     int pi = b.size(); 
-    float tmp = float(absPi) /pi ; 
+    float PI = float(absPi) /pi ; 
     int count = 0;
- 
-    while (tmp < 0.5){
-        tmp = tmp * 2;
-        count++;
-    }
- 
-    //float beta = 0.5 / tmp; 
-	
+
+ 	if(PI != 0){
+ 		while ( PI < 0.5){
+        	PI = PI * 2;
+    	    count++;
+   		}
+ 	}else{
+ 		PI = (float)1/7; // (# of 1's / length of b )
+ 		while ( PI < 0.5){
+        	PI = PI * 2;
+    	    count++;
+   		}
+
+ 	}
+
     float beta = pow (2.0, count);
-    cout << "Beta "<< beta <<endl; 
-	
-    //float invBeta = 1 / beta; 
-    //float x = (log10 (invBeta))/(log10 (2)) ;
-    //cout << x <<endl;   
+  
     float numA = stoi(a, nullptr, 2);
-    cout << "numerical A: " << numA << endl;
     
-    float sigmaNew = count; //numerical answer turn to binary? 
-    cout << "new sigma "<<sigmaNew  <<endl; 
-    int new_pi = absPi * count;
-    cout << "new pi "<< new_pi <<endl; 
+    string sigmaNew = bitset<2>(count).to_string();
+    int new_pi = absPi * beta;
+    string piOutput ; 
+    int counter = 0; 
 
-    for(int i = 0; i <= pi; i++){
-	// this for loop shud add the 1's into pi // new_pi is how many 1's
+    for(int i = 0; i <= b.size(); i++){
+    	while(counter < new_pi){
+    		piOutput.append("1");
+    		counter ++;  
+    	}
+    	while(counter <= b.size()){
+    		piOutput = "0" + piOutput; 
+    		counter++; 
+    	}
     }  
-    return 0; 
-}
- 
-bool densityCheck(string a, string b){ // a is σ , b is π
-    int absPi = 0; 
- 
-    for(int i = 0; i < b.size(); i++){
-        //cout << s.at(i) << " "; 
-        if(b.at(i) == 49){
-            absPi++;
-        }
-    }
- 
-    int pi = b.size(); 
- 
-    float tmp = float(absPi) /pi ; 
- 
-    if(tmp >= 0.5){
-        return true;
-    }
-    
-    return false; 
+
+
+
+    piNew = piOutput; 
+    newSigma = sigmaNew; 
 }
 
-float spFormat(string a, string b){ // a is σ , b is π
+bool densityCheck(string a, string b){ // a is σ , b is π
+	int absPi = 0; 
+
+	for(int i = 0; i < b.size(); i++){
+		//cout << s.at(i) << " "; 
+		if(b.at(i) == 49){
+			absPi++;
+		}
+	}
+
+	int pi = b.size(); 
+
+	float tmp = float(absPi) /pi ; 
+
+	if(tmp > 0.5){
+		return true;
+	}
+	
+	return false; 
+}
+
+float numFormat(string a, string b){ // a is σ , b is π
 
 	// finding absPi(# of 1s in b) and Pi(length of b)
 	int counter = 0; 
 
 	for(int i = 0; i < b.size(); i++){
-		//cout << s.at(i) << " "; 
 		if(b.at(i) == 49){
 			counter++;
 		}
@@ -271,27 +286,27 @@ float spFormat(string a, string b){ // a is σ , b is π
 	int absPi = counter; 
 	int pi = b.size(); 
 	
-	cout << endl << "absolute value of Pi : " << absPi << endl;
-	cout << "value of pi: " << pi << endl;
+	// cout << endl << "absolute value of Pi : " << absPi << endl;
+	// cout << "value of pi: " << pi << endl;
 	
 	//finding lower(decimal form of a) and upper(length of a) sigma
 	
 	int upperSigma = a.size(); 
 	int lowerSigma = stoi(a, nullptr, 2);
 
-	cout << "σ value: " << lowerSigma << endl;
-	cout << "Σ value: " << upperSigma << endl;
+	// cout << "σ value: " << lowerSigma << endl;
+	// cout << "Σ value: " << upperSigma << endl;
 	
 	//finding Σ0 
 
 	int upperSigma0 = pow (2.0, (upperSigma - 1));
 
-	cout << "Σ0 value: " << upperSigma0 << endl;
+	// cout << "Σ0 value: " << upperSigma0 << endl;
 
 	//finding scaling term: 2^(σ-Σ0)
     float scalingTerm = pow (2.0, (lowerSigma - upperSigma0));
     
-    cout << "scaling term: " << scalingTerm << endl;
+    // cout << "scaling term: " << scalingTerm << endl;
     
     //finding SP Number 
     
@@ -300,14 +315,9 @@ float spFormat(string a, string b){ // a is σ , b is π
     return sp;
 	
 }
-
 int main(){
-	string fileName; 
-	cout << "Enter file name: " << endl;
-	cin >> fileName; 
-
 	ofstream outFS; 
-	outFS.open(fileName);
+	outFS.open("numbersFile.txt");
 
 	if(!outFS.is_open()){
 		cout << "Error." << endl;
@@ -316,7 +326,7 @@ int main(){
 
 	int counter = 0; 
 	srand( (unsigned)time( NULL ) );
-	while(counter < 100){
+	while(counter < 1000){
 		outFS << fixed << setprecision(2) << (float) rand()/RAND_MAX << " " << (float) rand()/RAND_MAX << endl ; 
 		counter++; 
 	}
@@ -325,7 +335,7 @@ int main(){
 	outFS.close(); 
 
 	ifstream inFS; 
-	inFS.open(fileName);
+	inFS.open("numbersFile.txt");
 
 	if(!inFS.is_open()){
 		cout << "Could not open file "  << endl;
@@ -336,54 +346,79 @@ int main(){
 	float inputB;  
 
 	ofstream oFS; 
-	oFS.open("results.txt");
+	oFS.open("results.csv");
 
 	if(!oFS.is_open()){
 		cout << "Error." << endl;
 		exit(1);
 	}
 
-	oFS << "InputA	InputB	Product  A_in_Bin	B_in_Bin		AGenerator			BGenerator		DensityCheckA		DensityCheckB	Multiplication 		Numerical " << endl;
-
+	//oFS << "InputA	InputB 	A_in_Bin	B_in_Bin	AGenerator			BGenerator		DensityCheckA	DensityCheckB		Multiplication 		Actual 	Expected	Abs_Error	%Error" << endl;
+	oFS << "InputA  InputB Actual    Expected      Abs_Error	%Error" << endl;
 
 	while(inFS >> inputA){
 		inFS >> inputB; 
-		oFS << fixed << setprecision(2) << inputA << "	" << inputB << "	" ;
-		oFS <<fixed << setprecision(2) << (inputA*inputB) << "	";
+		oFS << fixed << setprecision(2) << inputA << ",	" << inputB << ",	" ;
 
 		string A = decTObin(inputA);
 		string B = decTObin(inputB);
 
-		oFS << A << "	" << B << "		"; 
+	//	oFS << A << "	" << B << "	"; 
 
 		string sigmaA = "01"; 
 		string sigmaB = "01"; 
 		string piA = generator(inputA); 
 		string piB = generator(inputB) ; 
 
-		oFS << "(" << sigmaA << ", " << piA << ")		" << "(" << sigmaB << ", " << piB << ")		"; 
+ 	//	oFS << "(" << sigmaA << ", " << piA << ")		" << "(" << sigmaB << ", " << piB << ")	 "; 
 
 
-		if(densityCheck(sigmaA, piA) == true){
-			oFS << "pass " << "					" ;
+		string sigmaResultA; 
+		string piResultA; 
+
+		string sigmaResultB; 
+		string piResultB; 
+
+		
+
+		if(densityCheck(sigmaA, piA)){
+	//	 	oFS << " 	pass " << "		" ;
 		}else{
-			oFS << "fail					";
-			scalingUnit(sigmaB, piB);
+			scalingUnit(sigmaA, piA, sigmaResultA, piResultA); 
+			sigmaA = sigmaResultA; 
+			piA = piResultA;
+	//	  	oFS << "(" << sigmaA << ", " << piA << ")	";
 		}
 
-		if(densityCheck(sigmaB, piB) == true){
-			oFS << "pass " << "			" ;
+		if(densityCheck(sigmaB, piB)){
+	//	 	oFS << " 	pass " << "			" ;
 		}else{
-			scalingUnit(sigmaB, piB);
-			oFS << "fail" << "			" ;
+			scalingUnit(sigmaB, piB, sigmaResultB, piResultB);
+	//	 	oFS << "(" << piResultB  << ", " << sigmaResultB << ")		" ;
+		 	sigmaB = sigmaResultB;
+		 	piB = piResultB; 
 		}
-
-		oFS << "( " <<  multiplicationSigma(sigmaA, sigmaB) << ", " << multiplicationPi(piA, piB) << ")			";
 
 		string newSigma = multiplicationSigma(sigmaA, sigmaB); 
 		string newPi = multiplicationPi(piA, piB); 
-		oFS << spFormat(newSigma, newPi) << endl ;
+
+		float expected = (inputA*inputB);
+
+	//	oFS << "(" <<  newSigma << ", " ; 
+	//	oFS << newPi<< ")		"; 
+
+		float actual = numFormat(newSigma, newPi);
+
+		oFS << actual;
+		oFS << ",		" << fixed << setprecision(2) << expected << ",";
+
+		float absError = abs(float(actual - expected)) ;
+		float pError = absError / expected;
+
+		oFS << "		 " << absError << ",		" << pError << endl;
+
 	}
+	outFS.close(); 
 
 	return 0; 
 }
